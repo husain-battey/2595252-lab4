@@ -14,7 +14,7 @@ async function searchCountry(countryName) {
         document.getElementById('country-info').innerHTML = `
             <h2>${details.name.common}</h2>
             <p><strong>Capital:</strong> ${details.capital[0]}</p>
-            <p><strong>Population:</strong> ${details.population.toLocaleString()}</p>
+            <p><strong>Population:</strong> ${details.population.toLocaleString('en-US')}</p>
             <p><strong>Region:</strong> ${details.region}</p>
             <img src="${details.flags.svg}" alt="${details.name.common} flag">`;
         document.getElementById('bordering-countries').innerHTML = ``;
@@ -24,9 +24,10 @@ async function searchCountry(countryName) {
             const response2 = await fetch(`https://restcountries.com/v3.1/alpha/${code}`);
             const data2 = await response2.json();
             let details2=data2[0];
-            document.getElementById('bordering-countries').innerHTML += `
-            <h2>${details2.name.common}</h2>
-            <img src="${details2.flags.svg}" alt="${details2.name.common} flag">`;
+            document.getElementById('bordering-countries').innerHTML += `   <li>
+        <p>${details2.name.common}</p>
+        <img src="${details2.flags.svg}" alt="${details2.name.common} flag">
+    </li>`;
 
         }
         // Update bordering countries section
