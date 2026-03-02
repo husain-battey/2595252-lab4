@@ -22,8 +22,15 @@
 }
 
 .border-grid {
-     display: flex;
-     list-style: none;
+      display: flex;          /* makes li items flex children */
+    flex-wrap: wrap;        /* allows wrapping */
+    gap: 15px;              /* spacing between items */
+    justify-content: center;
+    padding: 0;             /* remove default ul padding */
+    background-color:lightgreen;
+	border:3px solid lightgrey;
+	border-radius:30px;
+    margin-top: 20px;
     /* Additional layout properties */
 }
 .error {

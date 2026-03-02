@@ -6,6 +6,9 @@ async function searchCountry(countryName) {
     try {
         // Show loading spinner
          loader.style.display="block";
+         document.getElementById('error-message').innerText='';
+         document.getElementById('country-info').innerHTML = '';
+         document.getElementById('bordering-countries').innerHTML = ``;
         // Fetch country data
         const response = await fetch(`https://restcountries.com/v3.1/name/${countryName}`);
         const data = await response.json();
@@ -17,8 +20,9 @@ async function searchCountry(countryName) {
             <p><strong>Population:</strong> ${details.population.toLocaleString('en-US')}</p>
             <p><strong>Region:</strong> ${details.region}</p>
             <img src="${details.flags.svg}" alt="${details.name.common} flag">`;
-        document.getElementById('bordering-countries').innerHTML = ``;
+        
         // Fetch bordering countries
+        if(details.borders?.length>0){
         for (let i=0;i<details.borders.length;i++){
             let code=details.borders[i];
             const response2 = await fetch(`https://restcountries.com/v3.1/alpha/${code}`);
@@ -29,11 +33,12 @@ async function searchCountry(countryName) {
         <img src="${details2.flags.svg}" alt="${details2.name.common} flag">
     </li>`;
 
-        }
+        }}
         // Update bordering countries section
         
     } catch (error) {
-        
+     document.getElementById('error-message').innerText=' Invalid country';
+
     } finally {
         // Hide loading spinner
         loader.style.display="none";
